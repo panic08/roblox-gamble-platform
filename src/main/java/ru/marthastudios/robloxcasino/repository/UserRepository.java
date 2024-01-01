@@ -9,5 +9,6 @@ import ru.marthastudios.robloxcasino.model.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
     @Query("SELECT u.id, u.role, u.registered_at FROM users_table u WHERE u.id = :id")
-    User findByIdWithoutUserRobloxData(@Param("id") long id);
+    User findByIdWithoutRobloxData(@Param("id") long id);
+
 }

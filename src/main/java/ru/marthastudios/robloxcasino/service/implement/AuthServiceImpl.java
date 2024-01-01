@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.marthastudios.robloxcasino.api.RobloxApi;
 import ru.marthastudios.robloxcasino.api.payload.GetUsersByUsernameRequest;
 import ru.marthastudios.robloxcasino.api.payload.GetUsersByUsernameResponse;
-import ru.marthastudios.robloxcasino.dto.UserDto;
 import ru.marthastudios.robloxcasino.enums.UserRole;
 import ru.marthastudios.robloxcasino.exception.AccountDescriptionNotMatchException;
 import ru.marthastudios.robloxcasino.exception.AccountNonExistsException;
@@ -85,7 +84,7 @@ public class AuthServiceImpl implements AuthService {
 
             return jwtAccessTokenUtil.generateToken(newUser);
         } else {
-            User user = userRepository.findByIdWithoutUserRobloxData(userRobloxDataRepository.findUserIdByRobloxId(robloxUserId));
+            User user = userRepository.findByIdWithoutRobloxData(userRobloxDataRepository.findUserIdByRobloxId(robloxUserId));
 
             return jwtAccessTokenUtil.generateToken(user);
         }
@@ -106,11 +105,6 @@ public class AuthServiceImpl implements AuthService {
 
 
         return new GetAllPhraseByRobloxNicknameResponse(phrases.toString(), jwtPhraseTokenUtil.generateToken(robloxNickname, phrases.toString()));
-    }
-
-    @Override
-    public UserDto getUserInfo(long principalId) {
-        return userToUserDtoMapper.userToUserDto(userRepository.findById(principalId).orElse(null));
     }
 
 }

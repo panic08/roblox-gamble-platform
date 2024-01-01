@@ -21,7 +21,7 @@ public class JwtAccessTokenUtil {
     public String generateToken(User user){
         Map<String, Object> claims = new HashMap<>();
 
-        claims.put("role", user.getRegisteredAt());
+        claims.put("role", user.getRole());
         claims.put("registered_at", user.getRegisteredAt());
 
         return createToken(claims, user.getId());
