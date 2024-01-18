@@ -1,5 +1,6 @@
 package ru.marthastudios.robloxcasino.configuration;
 
+import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import org.springdoc.core.models.GroupedOpenApi;
@@ -26,12 +27,12 @@ public class SpringFoxConfiguration {
     @Bean
     public OpenAPI springShopOpenAPI() {
         return new OpenAPI()
-                .info(new Info().title("RobloxGamble API")
-                        .description("API for RobloxGamble")
-                        .version("v1.0.0"));
+                .info(new Info().title("RoFlip API")
+                        .description("API for RoFlip")
+                        .version("v1.0.0"))
 //                        .license(new License().name("Apache 2.0").url("http://springdoc.org")))
-//                .externalDocs(new ExternalDocumentation()
-//                        .description("SpringShop Wiki Documentation")
-//                        .url("https://springshop.wiki.github.org/docs"));
+                        .externalDocs(new ExternalDocumentation()
+                        .description("Websocket spec for Chat API and Game API (CoinFlip)")
+                        .url("https://docs.google.com/document/d/1d7eWj6UGQf3e3pGcl27FUzj5IOGvl95gzaijiJFtGqw/edit?usp=sharing"));
     }
 }

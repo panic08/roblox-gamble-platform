@@ -1,15 +1,12 @@
 package ru.marthastudios.robloxcasino.payload;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Builder
 public class GetAllPhraseByRobloxNicknameResponse {
     private String phrases;
     @JsonIgnore

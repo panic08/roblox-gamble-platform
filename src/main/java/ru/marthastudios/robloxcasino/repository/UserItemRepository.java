@@ -14,4 +14,6 @@ public interface UserItemRepository extends CrudRepository<UserItem, Long> {
     List<UserItem> findAllByUserIdWithOffsetAndLimit(@Param("userId") long userId,
                                                      @Param("minIndex") int minIndex,
                                                      @Param("maxIndex") int maxIndex);
+    @Query("SELECT ui.* FROM users_items_table ui WHERE ui.user_id = :userId")
+    List<UserItem> findAllByUserId(@Param("userId") long userId);
 }

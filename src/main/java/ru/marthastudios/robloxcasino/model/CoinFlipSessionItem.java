@@ -6,21 +6,20 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
-import ru.marthastudios.robloxcasino.enums.UserRole;
 
-@Table(name = "users_table")
+@Table(name = "coinflip_sessions_items_table")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class  User {
+public class CoinFlipSessionItem {
     @Id
     private Long id;
-    private UserRole role;
-    @MappedCollection(idColumn = "user_id")
-    private UserRobloxData robloxData;
-    @Column("registered_at")
-    private Long registeredAt;
+//    @Column("session_id")
+//    private Long sessionId;
+    @Column("user_id")
+    private Long userId;
+    @Column("item_id")
+    private Long itemId;
 }

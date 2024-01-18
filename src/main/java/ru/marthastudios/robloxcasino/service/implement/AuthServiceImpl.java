@@ -11,7 +11,6 @@ import ru.marthastudios.robloxcasino.enums.UserRole;
 import ru.marthastudios.robloxcasino.exception.AccountDescriptionNotMatchException;
 import ru.marthastudios.robloxcasino.exception.AccountNonExistsException;
 import ru.marthastudios.robloxcasino.exception.InvalidTokenException;
-import ru.marthastudios.robloxcasino.mapper.UserToUserDtoMapperImpl;
 import ru.marthastudios.robloxcasino.model.User;
 import ru.marthastudios.robloxcasino.model.UserRobloxData;
 import ru.marthastudios.robloxcasino.payload.GetAllPhraseByRobloxNicknameResponse;
@@ -30,7 +29,6 @@ public class AuthServiceImpl implements AuthService {
     private final JwtAccessTokenUtil jwtAccessTokenUtil;
     private final UserRepository userRepository;
     private final UserRobloxDataRepository userRobloxDataRepository;
-    private final UserToUserDtoMapperImpl userToUserDtoMapper;
 
     @Transactional
     @Override
@@ -95,16 +93,18 @@ public class AuthServiceImpl implements AuthService {
         WordGenerator wordGenerator = new WordGenerator();
         StringBuilder phrases = new StringBuilder();
 
-        for (int i = 0; i < 9; i++){
-            if (i == 8){
-                phrases.append(wordGenerator.newWord(4));
+        for (int i = 0; i < 7; i++){
+            if (i == 6){
+                phrases.append(wordGenerator.newWord(5));
             } else {
-                phrases.append(wordGenerator.newWord(4)).append(" ");
+                phrases.append(wordGenerator.newWord(5)).append(" ");
             }
         }
 
-
-        return new GetAllPhraseByRobloxNicknameResponse(phrases.toString(), jwtPhraseTokenUtil.generateToken(robloxNickname, phrases.toString()));
+        return GetAllPhraseByRobloxNicknameResponse.builder()
+                .phrases(phrases.toString())
+                .phraseToken(jwtPhraseTokenUtil.generateToken(robloxNickname, phrases.toString()))
+                .build();
     }
 
 }
