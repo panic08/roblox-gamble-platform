@@ -41,7 +41,7 @@ public class WithdrawalController {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))}),
     })
     public void create(UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken,
-                       @RequestBody @Valid @Parameter(description = "This object contains user_item_ds")
+                       @RequestBody @Valid @Parameter(description = "An object that contains an array of the user_item_ids")
                        CreateWithdrawalRequest createWithdrawalRequest) {
         if (usernamePasswordAuthenticationToken == null){
             throw new AuthenticationCredentialsNotFoundException("Unauthorized");
