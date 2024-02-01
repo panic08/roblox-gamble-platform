@@ -2,8 +2,6 @@ package ru.marthastudios.robloxcasino.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,8 +11,7 @@ import org.springframework.security.authentication.AuthenticationCredentialsNotF
 import org.springframework.web.bind.annotation.*;
 import ru.marthastudios.robloxcasino.dto.IncomingWithdrawalDto;
 import ru.marthastudios.robloxcasino.dto.UserItemDto;
-import ru.marthastudios.robloxcasino.payload.CreateUserItemsRequest;
-import ru.marthastudios.robloxcasino.payload.GetAllPhraseByRobloxNicknameResponse;
+import ru.marthastudios.robloxcasino.payload.user.CreateUserItemsRequest;
 import ru.marthastudios.robloxcasino.service.implement.ApiServiceImpl;
 import ru.marthastudios.robloxcasino.service.implement.WithdrawalServiceImpl;
 

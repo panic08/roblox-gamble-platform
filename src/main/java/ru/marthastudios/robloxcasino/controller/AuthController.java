@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.marthastudios.robloxcasino.dto.ErrorDto;
-import ru.marthastudios.robloxcasino.payload.GetAllPhraseByRobloxNicknameResponse;
+import ru.marthastudios.robloxcasino.payload.authorization.GetAllPhraseByRobloxNicknameResponse;
 import ru.marthastudios.robloxcasino.service.implement.AuthServiceImpl;
 
 @RestController

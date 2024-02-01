@@ -13,7 +13,7 @@ import ru.marthastudios.robloxcasino.exception.AccountNonExistsException;
 import ru.marthastudios.robloxcasino.exception.InvalidTokenException;
 import ru.marthastudios.robloxcasino.model.User;
 import ru.marthastudios.robloxcasino.model.UserRobloxData;
-import ru.marthastudios.robloxcasino.payload.GetAllPhraseByRobloxNicknameResponse;
+import ru.marthastudios.robloxcasino.payload.authorization.GetAllPhraseByRobloxNicknameResponse;
 import ru.marthastudios.robloxcasino.repository.UserRepository;
 import ru.marthastudios.robloxcasino.repository.UserRobloxDataRepository;
 import ru.marthastudios.robloxcasino.security.jwt.JwtAccessTokenUtil;

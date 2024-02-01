@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.marthastudios.robloxcasino.dto.ErrorDto;
-import ru.marthastudios.robloxcasino.payload.CreateMessageRequest;
+import ru.marthastudios.robloxcasino.payload.chat.CreateMessageRequest;
 import ru.marthastudios.robloxcasino.service.implement.ChatServiceImpl;
 
 @RestController
@@ -42,11 +42,27 @@ public class ChatController {
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))})
     })
     public void createMessage(UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken,
-                              @RequestBody @Valid @Parameter(description = "An object that contains 'message'") CreateMessageRequest createMessageRequest){
+                              @RequestBody @Valid @Parameter(description = "An object that contains 'message'") CreateMessageRequest createMessageRequest) {
         if (usernamePasswordAuthenticationToken == null){
             throw new AuthenticationCredentialsNotFoundException("Unauthorized");
         }
 
         chatService.createMessage((long) usernamePasswordAuthenticationToken.getPrincipal(), createMessageRequest);
+    }
+
+    @PostMapping("/admin")
+    @Operation(description = "Send admin message in chat")
+    @Parameter(in = ParameterIn.HEADER, name = "Authorization",
+            description = "We get the 'Authorization' token after authorization in the response of the /api/v1/auth/login method",
+            required = true,
+            content = @Content(schema = @Schema(implementation = String.class)))
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "409", description = "You don't have enough role",
+            content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))})
+    })
+    public void createAdminMessage(UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken,
+                                   @RequestBody @Valid @Parameter(description = "An object that contains 'message'") CreateMessageRequest createMessageRequest) {
+        chatService.createAdminMessage((long) usernamePasswordAuthenticationToken.getPrincipal(), createMessageRequest);
     }
 }

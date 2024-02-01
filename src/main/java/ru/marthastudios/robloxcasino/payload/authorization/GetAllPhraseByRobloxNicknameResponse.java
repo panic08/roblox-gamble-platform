@@ -1,4 +1,4 @@
-package ru.marthastudios.robloxcasino.payload;
+package ru.marthastudios.robloxcasino.payload.authorization;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;

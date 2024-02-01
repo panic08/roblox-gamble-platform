@@ -2,10 +2,11 @@ package ru.marthastudios.robloxcasino.service.implement;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.marthastudios.robloxcasino.dto.UserItemDto;
 import ru.marthastudios.robloxcasino.model.Item;
 import ru.marthastudios.robloxcasino.model.UserItem;
-import ru.marthastudios.robloxcasino.payload.CreateUserItemsRequest;
+import ru.marthastudios.robloxcasino.payload.user.CreateUserItemsRequest;
 import ru.marthastudios.robloxcasino.repository.ItemRepository;
 import ru.marthastudios.robloxcasino.repository.UserItemRepository;
 import ru.marthastudios.robloxcasino.service.ApiService;
@@ -19,9 +20,14 @@ public class ApiServiceImpl implements ApiService {
     private final UserItemRepository userItemRepository;
     private final ItemRepository itemRepository;
 
+    @Transactional
     @Override
     public List<UserItemDto> createUserItems(long userId, CreateUserItemsRequest createUserItemsRequest) {
-        Iterable<Item> items = itemRepository.findAllById(createUserItemsRequest.getItemIds());
+        List<Item> items = new ArrayList<>();
+
+        for (long itemId : createUserItemsRequest.getItemsIds()) {
+            items.add(itemRepository.findById(itemId).orElse(null));
+        }
 
         List<UserItem> userItems = new ArrayList<>();
         List<UserItemDto> userItemDtos = new ArrayList<>();

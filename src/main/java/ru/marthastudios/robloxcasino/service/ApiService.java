@@ -1,7 +1,7 @@
 package ru.marthastudios.robloxcasino.service;
 
 import ru.marthastudios.robloxcasino.dto.UserItemDto;
-import ru.marthastudios.robloxcasino.payload.CreateUserItemsRequest;
+import ru.marthastudios.robloxcasino.payload.user.CreateUserItemsRequest;
 
 import java.util.List;
 

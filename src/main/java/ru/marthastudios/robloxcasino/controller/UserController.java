@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.marthastudios.robloxcasino.dto.GameDto;
 import ru.marthastudios.robloxcasino.dto.UserDto;
 import ru.marthastudios.robloxcasino.dto.UserItemDto;
-import ru.marthastudios.robloxcasino.payload.GetGameStatisticResponse;
+import ru.marthastudios.robloxcasino.payload.games.GetGameStatisticResponse;
 import ru.marthastudios.robloxcasino.repository.ItemRepository;
 import ru.marthastudios.robloxcasino.service.implement.UserServiceImpl;
 

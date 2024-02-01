@@ -10,7 +10,7 @@ import ru.marthastudios.robloxcasino.mapper.UserToUserDtoMapperImpl;
 import ru.marthastudios.robloxcasino.model.Game;
 import ru.marthastudios.robloxcasino.model.Item;
 import ru.marthastudios.robloxcasino.model.UserItem;
-import ru.marthastudios.robloxcasino.payload.GetGameStatisticResponse;
+import ru.marthastudios.robloxcasino.payload.games.GetGameStatisticResponse;
 import ru.marthastudios.robloxcasino.repository.GameRepository;
 import ru.marthastudios.robloxcasino.repository.ItemRepository;
 import ru.marthastudios.robloxcasino.repository.UserItemRepository;
@@ -55,13 +55,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserItemDto> getAllItem(long id, Integer minIndex, Integer maxIndex) {
         if (maxIndex == null){
-            maxIndex = 9999999;
+            maxIndex = 99999999;
         }
         if (minIndex == null){
             minIndex = 0;
         }
 
-        List<UserItem> userItems = userItemRepository.findAllByUserIdWithOffsetAndLimit(id, minIndex, maxIndex);
+        List<UserItem> userItems = userItemRepository.findAllByUserIdWithOffsetAndLimit(id, minIndex, maxIndex - minIndex);
 
         List<Long> itemIds = new ArrayList<>();
 
@@ -89,13 +89,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<GameDto> getAllGame(long id, Integer minIndex, Integer maxIndex) {
         if (maxIndex == null){
-            maxIndex = 9999999;
+            maxIndex = 99999999;
         }
         if (minIndex == null){
             minIndex = 0;
         }
 
 
-        return gameToGameDtoMapper.gameListToGameDtoList(gameRepository.findAllByUserIdWithOffsetAndLimit(id, minIndex, maxIndex));
+        return gameToGameDtoMapper.gameListToGameDtoList(gameRepository.findAllByUserIdWithOffsetAndLimit(id, minIndex, maxIndex - minIndex));
     }
 }

@@ -6,30 +6,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.marthastudios.robloxcasino.dto.CoinFlipSessionDto;
-import ru.marthastudios.robloxcasino.dto.ItemDto;
-import ru.marthastudios.robloxcasino.dto.UserDto;
+import ru.marthastudios.robloxcasino.dto.*;
 import ru.marthastudios.robloxcasino.enums.GameType;
-import ru.marthastudios.robloxcasino.exception.AccountsSamesException;
-import ru.marthastudios.robloxcasino.exception.GameAlreadyStartedException;
-import ru.marthastudios.robloxcasino.exception.IncorrectCostException;
-import ru.marthastudios.robloxcasino.exception.ItemNotFoundException;
-import ru.marthastudios.robloxcasino.mapper.CoinFlipSessionToCoinFlipSessionDtoMapperImpl;
-import ru.marthastudios.robloxcasino.mapper.GameToGameDtoMapperImpl;
-import ru.marthastudios.robloxcasino.mapper.ItemToItemDtoMapperImpl;
-import ru.marthastudios.robloxcasino.mapper.UserToUserDtoMapperImpl;
+import ru.marthastudios.robloxcasino.enums.UserRole;
+import ru.marthastudios.robloxcasino.exception.*;
+import ru.marthastudios.robloxcasino.mapper.*;
 import ru.marthastudios.robloxcasino.message.EventCoinFlipSessionMessage;
 import ru.marthastudios.robloxcasino.model.*;
-import ru.marthastudios.robloxcasino.payload.CreateCoinFlipSessionRequest;
-import ru.marthastudios.robloxcasino.payload.CreateUpgraderRequest;
-import ru.marthastudios.robloxcasino.payload.CreateUpgraderResponse;
-import ru.marthastudios.robloxcasino.payload.JoinCoinFlipSessionRequest;
+import ru.marthastudios.robloxcasino.payload.games.*;
 import ru.marthastudios.robloxcasino.repository.*;
 import ru.marthastudios.robloxcasino.service.GameService;
 import ru.marthastudios.robloxcasino.util.DiceRollUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -98,7 +90,7 @@ public class GameServiceImpl implements GameService {
                 .issuerUserId(principalId)
                 .items(coinFlipSessionItems)
                 .serverSeed(DiceRollUtil.generateSecret())
-                .clientSeed(DiceRollUtil.generateSecret())
+                .clientSeed("00000000000f424043f26367f461f6947fb4b8818df0aa6d6030e26a9d9add13")
                 .createdAt(System.currentTimeMillis())
                 .build();
 
@@ -243,9 +235,6 @@ public class GameServiceImpl implements GameService {
 
             otherSideItemList.add(newOtherSideItem);
         }
-
-        System.out.println("issuerCost: " + issuerItemsCost + " otherSideCost:" + otherSideItemsCost
-        + " percent lower: " + (issuerItemsCost - (issuerItemsCost * 10 / 100)) + " percent higher: " + (issuerItemsCost + (issuerItemsCost * 10 / 100)));
 
         if (otherSideItemsCost < issuerItemsCost - (issuerItemsCost * 10 / 100) || otherSideItemsCost > issuerItemsCost + (issuerItemsCost * 10 / 100)){
             throw new IncorrectCostException("The sum of items did not fall within the range of the value of the sum of items issuer value");
@@ -404,6 +393,140 @@ public class GameServiceImpl implements GameService {
     @Transactional
     @Override
     public CreateUpgraderResponse createUpgrader(long principalId, CreateUpgraderRequest createUpgraderRequest) {
-        return null;
+        UserItem userItem = userItemRepository.findById(createUpgraderRequest.getFromUserItemId())
+                .orElse(null);
+
+        int fromUpgraderItemCost = itemRepository.findCostById(userItem.getItemId());
+        int toUpgraderItemCost = itemRepository.findCostById(
+                upgraderItemRepository.findById(createUpgraderRequest.getToUpgraderItemId())
+                        .orElse(null).getItemId()
+        );
+
+        if (fromUpgraderItemCost >= toUpgraderItemCost) {
+            throw new IncorrectCostException("FromUserItem cannot be priced greater than or equal to ToUserItem");
+        }
+
+        userItemRepository.save(
+                UserItem.builder()
+                        .userId(userBotId)
+                        .itemId(userItem.getItemId())
+                        .build()
+        );
+
+        userItemRepository.deleteById(createUpgraderRequest.getFromUserItemId());
+
+        double luckyNumber = DiceRollUtil.generateRandomNumber(DiceRollUtil.generateSecret(),
+                "00000000000f424043f26367f461f6947fb4b8818df0aa6d6030e26a9d9add13",
+                DiceRollUtil.generateSecret());
+
+        double percentToWin = (100.0 / ((double) toUpgraderItemCost / fromUpgraderItemCost)) * 0.01;
+
+        if (luckyNumber <= percentToWin) {
+            long toItemItemId = upgraderItemRepository.findById(createUpgraderRequest.getToUpgraderItemId())
+                    .orElse(null).getItemId();
+
+            UserItem newUserItem = userItemRepository.save(UserItem.builder()
+                    .userId(principalId)
+                    .itemId(toItemItemId)
+                    .build());
+
+            upgraderItemRepository.deleteById(createUpgraderRequest.getToUpgraderItemId());
+
+            Game newGame = Game.builder()
+                    .type(GameType.UPGRADER)
+                    .userId(principalId)
+                    .isWin(true)
+                    .amount(toUpgraderItemCost - fromUpgraderItemCost)
+                    .createdAt(System.currentTimeMillis())
+                    .build();
+
+            gameRepository.save(newGame);
+
+            Item newUserItemItem = itemRepository.findById(toItemItemId)
+                    .orElse(null);
+
+            UserItemDto userItemDto = UserItemDto.builder()
+                    .id(newUserItem.getId())
+                    .itemId(newUserItemItem.getId())
+                    .itemFullName(newUserItemItem.getFullName())
+                    .itemCost(newUserItemItem.getCost())
+                    .build();
+
+            return CreateUpgraderResponse.builder()
+                    .isWin(true)
+                    .winUserItem(userItemDto)
+                    .build();
+        } else {
+            Game newGame = Game.builder()
+                    .type(GameType.UPGRADER)
+                    .userId(principalId)
+                    .isWin(false)
+                    .amount(fromUpgraderItemCost)
+                    .createdAt(System.currentTimeMillis())
+                    .build();
+
+            gameRepository.save(newGame);
+
+            return CreateUpgraderResponse.builder()
+                    .isWin(false)
+                    .build();
+        }
+    }
+
+    @Override
+    public List<UpgraderItemDto> getAllUpgraderItem(Integer minIndex, Integer maxIndex) {
+        if (maxIndex == null){
+            maxIndex = 99999999;
+        }
+        if (minIndex == null){
+            minIndex = 0;
+        }
+
+        List<UpgraderItem> upgraderItemList =
+                upgraderItemRepository.findAllWithOffsetAndLimit(minIndex, maxIndex - minIndex);
+
+        List<UpgraderItemDto> upgraderItemDtoList = new ArrayList<>();
+
+        Map<Long, Item> preCachedItemsMap = new HashMap<>();
+
+        for (UpgraderItem upgraderItem : upgraderItemList) {
+            Item item;
+
+            if (preCachedItemsMap.get(upgraderItem.getItemId()) == null) {
+                item = itemRepository.findById(upgraderItem.getItemId()).orElse(null);
+
+                preCachedItemsMap.put(upgraderItem.getItemId(), item);
+            } else {
+                item = preCachedItemsMap.get(upgraderItem.getItemId());
+            }
+
+            upgraderItemDtoList.add(UpgraderItemDto.builder()
+                    .id(upgraderItem.getId())
+                    .itemId(upgraderItem.getItemId())
+                    .itemFullName(item.getFullName())
+                    .itemCost(item.getCost())
+                    .build());
+        }
+
+        return upgraderItemDtoList;
+    }
+
+    @Transactional
+    @Override
+    public void createUpgraderItem(long principalId, CreateUpgraderItemRequest createUpgraderItemRequest) {
+        if (!userRepository.findRoleById(principalId).equals(UserRole.STAFF)) {
+            throw new InsufficientRoleException("You don't have enough role");
+        }   
+
+        UserItem userItem = userItemRepository.findById(createUpgraderItemRequest.getUserItemId())
+                .orElse(null);
+
+        UpgraderItem upgraderItem = UpgraderItem.builder()
+                .itemId(userItem.getItemId())
+                .build();
+
+        upgraderItemRepository.save(upgraderItem);
+
+        userItemRepository.delete(userItem);
     }
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.marthastudios.robloxcasino.dto.ErrorDto;
-import ru.marthastudios.robloxcasino.payload.CreateWithdrawalRequest;
+import ru.marthastudios.robloxcasino.payload.user.CreateWithdrawalRequest;
 import ru.marthastudios.robloxcasino.service.implement.WithdrawalServiceImpl;
 
 @RestController

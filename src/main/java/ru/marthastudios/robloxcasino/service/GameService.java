@@ -1,10 +1,8 @@
 package ru.marthastudios.robloxcasino.service;
 
 import ru.marthastudios.robloxcasino.dto.CoinFlipSessionDto;
-import ru.marthastudios.robloxcasino.payload.CreateCoinFlipSessionRequest;
-import ru.marthastudios.robloxcasino.payload.CreateUpgraderRequest;
-import ru.marthastudios.robloxcasino.payload.CreateUpgraderResponse;
-import ru.marthastudios.robloxcasino.payload.JoinCoinFlipSessionRequest;
+import ru.marthastudios.robloxcasino.dto.UpgraderItemDto;
+import ru.marthastudios.robloxcasino.payload.games.*;
 
 import java.util.List;
 
@@ -13,4 +11,6 @@ public interface GameService {
     List<CoinFlipSessionDto> getAllCoinFlipSession();
     void joinCoinFlipSession(long principalId, long id, JoinCoinFlipSessionRequest joinCoinFlipSessionRequest);
     CreateUpgraderResponse createUpgrader(long principalId, CreateUpgraderRequest createUpgraderRequest);
+    List<UpgraderItemDto> getAllUpgraderItem(Integer minIndex, Integer maxIndex);
+    void createUpgraderItem(long principalId, CreateUpgraderItemRequest createUpgraderItemRequest);
 }

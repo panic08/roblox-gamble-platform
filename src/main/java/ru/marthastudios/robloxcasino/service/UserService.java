@@ -3,7 +3,7 @@ package ru.marthastudios.robloxcasino.service;
 import ru.marthastudios.robloxcasino.dto.GameDto;
 import ru.marthastudios.robloxcasino.dto.UserDto;
 import ru.marthastudios.robloxcasino.dto.UserItemDto;
-import ru.marthastudios.robloxcasino.payload.GetGameStatisticResponse;
+import ru.marthastudios.robloxcasino.payload.games.GetGameStatisticResponse;
 
 import java.util.List;
 

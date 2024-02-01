@@ -1,4 +1,4 @@
-package ru.marthastudios.robloxcasino.payload;
+package ru.marthastudios.robloxcasino.payload.games;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

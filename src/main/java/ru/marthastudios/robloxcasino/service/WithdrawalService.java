@@ -1,7 +1,7 @@
 package ru.marthastudios.robloxcasino.service;
 
 import ru.marthastudios.robloxcasino.dto.IncomingWithdrawalDto;
-import ru.marthastudios.robloxcasino.payload.CreateWithdrawalRequest;
+import ru.marthastudios.robloxcasino.payload.user.CreateWithdrawalRequest;
 
 import java.util.List;
 

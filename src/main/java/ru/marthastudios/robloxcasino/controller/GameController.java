@@ -10,19 +10,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-import ru.marthastudios.robloxcasino.dto.CoinFlipSessionDto;
-import ru.marthastudios.robloxcasino.dto.ErrorDto;
-import ru.marthastudios.robloxcasino.dto.GameDto;
-import ru.marthastudios.robloxcasino.dto.UserItemDto;
-import ru.marthastudios.robloxcasino.payload.CreateCoinFlipSessionRequest;
-import ru.marthastudios.robloxcasino.payload.CreateUpgraderRequest;
-import ru.marthastudios.robloxcasino.payload.CreateUpgraderResponse;
-import ru.marthastudios.robloxcasino.payload.JoinCoinFlipSessionRequest;
+import ru.marthastudios.robloxcasino.dto.*;
+import ru.marthastudios.robloxcasino.payload.games.*;
 import ru.marthastudios.robloxcasino.service.implement.GameServiceImpl;
 
 import java.util.List;
@@ -78,7 +71,7 @@ public class GameController {
         if (usernamePasswordAuthenticationToken == null){
             throw new AuthenticationCredentialsNotFoundException("Unauthorized");
         }
-
+;
         gameService.joinCoinFlipSession((long) usernamePasswordAuthenticationToken.getPrincipal(),
                 id, joinCoinFlipSessionRequest);
     }
@@ -101,11 +94,11 @@ public class GameController {
             content = @Content(schema = @Schema(implementation = String.class)))
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "We got a CreateUpgraderResponse object that contains \"win\", from which we will determine whether the user has won or not"),
-            @ApiResponse(responseCode = "409", description = "The user does not have such an item",
+            @ApiResponse(responseCode = "409", description = "FromUserItem cannot be priced greater than or equal to ToUserItem",
                     content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))})
     })
     public CreateUpgraderResponse createUpgrader(UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken,
-                                                 @RequestBody @Valid @Parameter(description = "An object that contains user_item_id and upgrader_item_id")
+                                                 @RequestBody @Parameter(description = "An object that contains from_user_item_id and to_upgrader_item_id")
                                                  CreateUpgraderRequest createUpgraderRequest) {
         if (usernamePasswordAuthenticationToken == null){
             throw new AuthenticationCredentialsNotFoundException("Unauthorized");
@@ -113,4 +106,38 @@ public class GameController {
 
         return gameService.createUpgrader((long) usernamePasswordAuthenticationToken.getPrincipal(), createUpgraderRequest);
     }
+
+    @GetMapping("/upgrader/item/getAll")
+    @Operation(description = "Get all UpgraderItem")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "We got all UpgraderItem")
+    })
+    public List<UpgraderItemDto> getAllUpgraderItem(@Parameter(description = "Minimum inclusive index from which upgrader items will be returned")
+                                                        @RequestParam(value = "min_index", required = false) Integer minIndex,
+                                                    @Parameter(description = "The maximum index is not inclusive to which upgrader items will be returned")
+                                                        @RequestParam(value = "max_index", required = false) Integer maxIndex) {
+        return gameService.getAllUpgraderItem(minIndex, maxIndex);
+    }
+
+    @PostMapping("/upgrader/item")
+    @Operation(description = "Creating a UpgraderItem from UserItem")
+    @Parameter(in = ParameterIn.HEADER, name = "Authorization",
+            description = "We get the 'Authorization' token after authorization in the response of the /api/v1/auth/login method",
+            required = true,
+            content = @Content(schema = @Schema(implementation = String.class)))
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "We create a UpgraderItem from UserItem"),
+            @ApiResponse(responseCode = "409", description = "You don't have enough role",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = ErrorDto.class))})
+    })
+    public void createUpgraderItem(UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken,
+                                   @Parameter(description = "An object that contains user_item_id for create UpgraderItem")
+                                    @RequestBody CreateUpgraderItemRequest createUpgraderItemRequest) {
+        if (usernamePasswordAuthenticationToken == null){
+            throw new AuthenticationCredentialsNotFoundException("Unauthorized");
+        }
+
+        gameService.createUpgraderItem((long) usernamePasswordAuthenticationToken.getPrincipal(), createUpgraderItemRequest);
+    }
+
 }

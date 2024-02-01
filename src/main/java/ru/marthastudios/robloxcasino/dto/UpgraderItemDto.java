@@ -1,20 +1,20 @@
 package ru.marthastudios.robloxcasino.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@Schema(name = "UserRobloxData")
+@Getter
+@Setter
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Builder
-public class UserRobloxDataDto {
-    @JsonIgnore
+@Schema(name = "UpgraderItem")
+public class UpgraderItemDto {
     private long id;
-    private long robloxId;
-    private String robloxNickname;
-    private String robloxAvatarLink;
+    private long itemId;
+    private String itemFullName;
+    private int itemCost;
 }
