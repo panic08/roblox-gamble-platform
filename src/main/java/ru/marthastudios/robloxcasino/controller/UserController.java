@@ -92,4 +92,13 @@ public class UserController {
         return userService.getAllItem(id, minIndex, maxIndex);
     }
 
+    @GetMapping("/getByRolboxId/{robloxId}")
+    @Operation(description = "Get user by roblox id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "We got game stat of the Auth user",
+                    content = {@Content(mediaType = "application/json", schema = @Schema(implementation = UserDto.class))})
+    })
+    public UserDto getByRobloxId(@PathVariable("robloxId") long robloxId) {
+        return userService.getByRobloxId(robloxId);
+    }
 }

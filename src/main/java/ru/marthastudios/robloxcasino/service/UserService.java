@@ -12,4 +12,5 @@ public interface UserService {
     GetGameStatisticResponse getAuthGameStat(long principalId);
     List<UserItemDto> getAllItem(long id, Integer minIndex, Integer maxIndex);
     List<GameDto> getAllGame(long principalId, Integer minIndex, Integer maxIndex);
+    UserDto getByRobloxId(long robloxId);
 }

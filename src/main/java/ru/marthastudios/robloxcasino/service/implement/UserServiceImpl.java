@@ -11,10 +11,7 @@ import ru.marthastudios.robloxcasino.model.Game;
 import ru.marthastudios.robloxcasino.model.Item;
 import ru.marthastudios.robloxcasino.model.UserItem;
 import ru.marthastudios.robloxcasino.payload.games.GetGameStatisticResponse;
-import ru.marthastudios.robloxcasino.repository.GameRepository;
-import ru.marthastudios.robloxcasino.repository.ItemRepository;
-import ru.marthastudios.robloxcasino.repository.UserItemRepository;
-import ru.marthastudios.robloxcasino.repository.UserRepository;
+import ru.marthastudios.robloxcasino.repository.*;
 import ru.marthastudios.robloxcasino.service.UserService;
 
 import java.util.ArrayList;
@@ -27,6 +24,7 @@ public class UserServiceImpl implements UserService {
     private final UserItemRepository userItemRepository;
     private final ItemRepository itemRepository;
     private final GameRepository gameRepository;
+    private final UserRobloxDataRepository userRobloxDataRepository;
     private final UserToUserDtoMapperImpl userToUserDtoMapper;
     private final GameToGameDtoMapperImpl gameToGameDtoMapper;
 
@@ -97,5 +95,17 @@ public class UserServiceImpl implements UserService {
 
 
         return gameToGameDtoMapper.gameListToGameDtoList(gameRepository.findAllByUserIdOrderByCreatedAtDescWithOffsetLimit(id, minIndex, maxIndex - minIndex));
+    }
+
+    @Override
+    public UserDto getByRobloxId(long robloxId) {
+        Long userId = userRobloxDataRepository.findUserIdByRobloxId(robloxId);
+
+        if (userId == null) {
+            return null;
+        }
+
+        return userToUserDtoMapper.userToUserDto(userRepository.findById(userId)
+                .orElse(null));
     }
 }

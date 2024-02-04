@@ -12,5 +12,5 @@ public interface UserRobloxDataRepository extends CrudRepository<UserRobloxData,
     UserRobloxData findByRobloxId(@Param("robloxId") long robloxId);
 
     @Query("SELECT urd.user_id FROM users_roblox_data_table urd WHERE urd.roblox_id = :robloxId")
-    long findUserIdByRobloxId(@Param("robloxId") long robloxId);
+    Long findUserIdByRobloxId(@Param("robloxId") long robloxId);
 }
