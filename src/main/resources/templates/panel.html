@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{/css/panel/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/popups.css}" />
+    <link rel="shortcut icon" th:href="@{/img/flpicon.png}" type="image/x-icon">
+    <title>RoFlip | Panel</title>
+  </head>
+  <body>
+    <header class="header-logo">
+      <a href="/"
+        ><img th:src="@{/img/header-logo.png}" alt=""
+      /></a>
+    </header>
+    <main>
+      <div class="admin-items-list"></div>
+      <div class="right-row">
+        <div class="message-block">
+          <input type="text" class="message-input" placeholder="chat message" />
+          <div class="post-btn">post</div>
+        </div>
+        <div class="add-upgrader-btn">add to upgrader</div>
+      </div>
+    </main>
+    <div class="error-container popup">
+      <div class="error-block">
+        <img class="error-image" th:src="@{/img/plus.png}" alt="" />
+        <div class="error-text">Error text</div>
+        <img class="error-close" th:src="@{/img/plus.png}" alt="" />
+      </div>
+    </div>
+    <script type="module" th:src="@{/scripts/panel/admin.js}"></script>
+    <script type="module" th:src="@{/scripts/page/handleEscape.js}"></script>
+  </body>
+</html>

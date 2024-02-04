@@ -37,6 +37,7 @@ public class GameServiceImpl implements GameService {
     private final ItemToItemDtoMapperImpl itemToItemDtoMapper;
     private final CoinFlipSessionToCoinFlipSessionDtoMapperImpl coinFlipSessionToCoinFlipSessionDtoMapper;
     private final UserToUserDtoMapperImpl userToUserDtoMapper;
+    private final DiceRollUtil diceRollUtil;
     @Value("${games.userBotId}")
     private Long userBotId;
 
@@ -89,7 +90,7 @@ public class GameServiceImpl implements GameService {
         CoinFlipSession coinFlipSession = CoinFlipSession.builder()
                 .issuerUserId(principalId)
                 .items(coinFlipSessionItems)
-                .serverSeed(DiceRollUtil.generateSecret())
+                .serverSeed(diceRollUtil.generateSecret())
                 .clientSeed("00000000000f424043f26367f461f6947fb4b8818df0aa6d6030e26a9d9add13")
                 .createdAt(System.currentTimeMillis())
                 .build();
@@ -254,11 +255,11 @@ public class GameServiceImpl implements GameService {
 
         coinFlipSession.setOtherSideUserId(principalId);
 
-        String salt = DiceRollUtil.generateSecret();
+        String salt = diceRollUtil.generateSecret();
 
         coinFlipSession.setSalt(salt);
 
-        double luckyNumber = DiceRollUtil.generateRandomNumber(coinFlipSession.getServerSeed(),
+        double luckyNumber = diceRollUtil.generateRandomNumber(coinFlipSession.getServerSeed(),
                 coinFlipSession.getClientSeed(), salt);
 
         List<Item> allCoinFlipSessionItems = new ArrayList<>();
@@ -415,9 +416,9 @@ public class GameServiceImpl implements GameService {
 
         userItemRepository.deleteById(createUpgraderRequest.getFromUserItemId());
 
-        double luckyNumber = DiceRollUtil.generateRandomNumber(DiceRollUtil.generateSecret(),
+        double luckyNumber = diceRollUtil.generateRandomNumber(diceRollUtil.generateSecret(),
                 "00000000000f424043f26367f461f6947fb4b8818df0aa6d6030e26a9d9add13",
-                DiceRollUtil.generateSecret());
+                diceRollUtil.generateSecret());
 
         double percentToWin = (100.0 / ((double) toUpgraderItemCost / fromUpgraderItemCost)) * 0.01;
 

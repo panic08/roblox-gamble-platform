@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+          rel="stylesheet"
+  />
+  <link rel="stylesheet" th:href="@{/css/chat.css}" />
+  <link rel="stylesheet" th:href="@{/css/header.css}" />
+  <link rel="stylesheet" th:href="@{/css/upgrader/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/popups.css}" />
+  <link rel="shortcut icon" th:href="@{/img/flpicon.png}" type="image/x-icon">
+  <title>RoFlip | Upgrader</title>
+</head>
+<body>
+<header>
+  <div class="header-mobile-only">
+    <img th:src="@{/img/burger.png}" alt="" />
+  </div>
+  <a href="/" class="header-logo">
+    <img th:src="@{/img/header-logo.png}" class="header-logo-shadow" />
+    <img th:src="@{/img/header-logo.png}" class="header-logo-real" alt="logo" />
+  </a>
+  <div class="header-nav">
+    <div class="header-nav-item auth header-deposit">Deposit</div>
+    <a class="header-nav-item auth" href="/inventory"
+    >Inventory</a
+    >
+    <div class="header-nav-item un-auth header-login">Login</div>
+  </div>
+</header>
+<main>
+  <div class="sidebar">
+    <div class="sidebar-nav">
+      <a href="/" class="sidebar-item">
+        <div class="sidebar-item-image">
+          <img th:src="@{/img/sidebar-coin.png}" alt="sidebar-image" />
+        </div>
+        <div class="sidebar-item-text">Coinflip</div></a
+      >
+      <a href="/upgrader" class="sidebar-item">
+        <div class="sidebar-item-image">
+          <img th:src="@{/img/sidebar-firework.png}" alt="sidebar-image" />
+        </div>
+        <div class="sidebar-item-text">Upgrader</div></a
+      >
+    </div>
+    <div class="sidebar-footer">
+      <div class="sidebar-logos">
+        <a href="/" class="sidebar-footer-logo-mobile">
+          <img th:src="@{/img/header-logo.png}" alt="" />
+        </a>
+        <a
+                href="https://discord.gg/5MbsZhGnYM"
+                target="_blank"
+                class="sidebar-footer-discord"
+        >
+          <img th:src="@{/img/discord.png}" alt="" />
+        </a>
+      </div>
+      <div class="sidebar-footer-text">
+        Please note that RoFlip is an independent venture and not endorsed,
+        sposored, or affiliated with Roblox Corporation. Copyright © roflip
+        2024.
+      </div>
+    </div>
+  </div>
+      <div class="main-content">
+        <div class="upgrader">
+          <div class="upgrade-menu-container">
+            <div class="upgrader-menu">
+              <div class="item-to-upgrade-block">
+                <div class="item-block-cost-block">
+                  <div class="item-to-upgrade-cost">0 F$</div>
+                </div>
+                <div class="item-block-main-info-block">
+                  <div class="item-to-upgrade-title">User's Items</div>
+                  <div class="item-to-upgrade-subtitle">To upgrade</div>
+                  <img
+                    class="item-to-upgrade-image"
+                    th:src="@{/img/upgrader-knifes.png}"
+                  />
+                </div>
+              </div>
+              <div class="chance-container">
+                <div class="chance-block">
+                  <div
+                    class="border-changeable chance-border chance-first-border"
+                  ></div>
+                  <div
+                    class="border-changeable chance-border chance-second-border"
+                  ></div>
+                  <div class="chance-border chance-third-border"></div>
+                  <div
+                    class="border-changeable chance-border chance-fourth-border"
+                  ></div>
+
+                  <div class="chance-line-cross chance-line-cross-first"></div>
+                  <div class="chance-line-cross chance-line-cross-second"></div>
+
+                  <div class="chance-circle chance-circle-first"></div>
+                  <div class="chance-circle chance-circle-second"></div>
+                  <div class="chance-circle chance-circle-third"></div>
+                  <div class="chance-circle chance-circle-fourth"></div>
+
+                  <div class="chance-text">
+                    <div class="chance-text-title">CHANCE</div>
+                    <div class="chance-text-number">0%</div>
+                    <div class="chance-is-win"></div>
+                  </div>
+                </div>
+                <div class="chance-label">
+                  <img
+                    class="chance-label-image-real"
+                    th:src="@{/img/triangle.png}"
+                    alt=""
+                  />
+                  <img
+                    class="chance-label-image-shadow"
+                    th:src="@{/img/triangle.png}"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="item-to-receive-block">
+                <div class="item-block-main-info-block">
+                  <div class="item-to-receive-title">User's Items</div>
+                  <div class="item-to-receive-subtitle">To receive</div>
+                  <img
+                    class="item-to-receive-image"
+                    th:src="@{/img/upgrader-knifes.png}"
+                  />
+                </div>
+
+                <div class="item-block-cost-block">
+                  <div class="item-to-receive-cost">0 F$</div>
+                </div>
+              </div>
+            </div>
+            <div class="chance-border-bottom"></div>
+          </div>
+          <div class="upgrade-btn">UPGRADE</div>
+          <div class="items-lists">
+            <div class="to-upgrade-items-block"></div>
+            <div class="to-receive-items-block"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="error-container popup">
+      <div class="error-block">
+        <img class="error-image" th:src="@{/img/plus.png}" alt="" />
+        <div class="error-text">Error text</div>
+        <img class="error-close" th:src="@{/img/plus.png}" alt="" />
+      </div>
+    </div>
+    <div class="login-container popup">
+      <div class="login-block">
+        <div class="login-block-title">Login</div>
+        <input type="text" class="login-block-input" placeholder="Username" />
+        <div class="phrases">
+          <div class="phrases-image">
+            <img th:src="@{/img/shield.png}" alt="" />
+          </div>
+          <div class="phrases-content">
+            <div class="phrases-title">
+              Put code in your roblox description:
+            </div>
+            <div class="phrases-text"></div>
+          </div>
+        </div>
+        <div class="login-block-btns">
+          <div class="login-block-btn-submit">Login</div>
+          <div class="login-block-btn-cancel">Cancel</div>
+        </div>
+      </div>
+    </div>
+    <div class="deposit-container popup">
+      <div class="deposit-block">
+        <div class="deposit-title">Deposit Items</div>
+        <div class="deposit-form">
+          <div class="deposit-bot">
+            <div class="deposit-bot-name">RF_HolderBot</div>
+            <div class="deposit-bot-icon">
+              <img th:src="@{/img/deposit-icon.png}" alt="" />
+            </div>
+          </div>
+          <a
+            href="https://www.roblox.com/share?code=6c561210ec6a9c488f4ff0b331024c81&type=Server"
+            class="deposit-btn"
+            target="_blank"
+            >JOIN</a
+          >
+        </div>
+        <div class="deposit-warning-title">Warning!</div>
+        <div class="deposit-warning-flex">
+          <div class="deposit-warning-image">
+            <img th:src="@{/img/shield.png}" alt="" />
+          </div>
+          <div class="deposit-warning-text">
+            <div>
+              There may be players with a similar nickname on the servers.
+              Double check the bot's nickname before deposit items.
+            </div>
+            <div>
+              <span>RoFlip is not responsible for stolen items!</span>
+            </div>
+          </div>
+        </div>
+        <div class="deposit-close">
+          <img th:src="@{/img/cancel.png}" alt="close" />
+        </div>
+      </div>
+    </div>
+    <div class="chat">
+      <div class="chat-border"></div>
+      <div class="chat-messages"></div>
+      <div class="chat-form">
+        <input
+          type="text"
+          class="chat-input"
+          placeholder="Type something here..."
+        />
+        <div class="chat-submit">
+          <img  th:src="@{/img/message.png}" alt="" />
+        </div>
+      </div>
+      <div class="chat-border chat-unauth"></div>
+      <div class="chat-unauth chat-unauth-text">You are not authorized</div>
+    </div>
+    <div class="open-chat">
+      <img class="open-chat-image" th:src="@{/img/arrow.png}" alt="" />
+    </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+  <script type="module" th:src="@{/scripts/socket/socket.js}"></script>
+  <script type="module" th:src="@{/scripts/chat/openChat.js}"></script>
+  <script type="module" th:src="@{/scripts/chat/message.js}"></script>
+  <script type="module" th:src="@{/scripts/chat/authChat.js}"></script>
+  <script type="module" th:src="@{/scripts/upgrader/upgrade.js}"></script>
+  <script type="module" th:src="@{/scripts/upgrader/initLists.js}"></script>
+  <script type="module" th:src="@{/scripts/page/loginForm.js}"></script>
+  <script type="module" th:src="@{/scripts/page/replaceAuth.js}"></script>
+  <script type="module" th:src="@{/scripts/page/depositForm.js}"></script>
+  <script type="module" th:src="@{/scripts/page/sidebar.js}"></script>
+  <script type="module" th:src="@{/scripts/page/handleEscape.js}"></script>
+  <script type="module" th:src="@{/scripts/page/header.js}"></script>
+  </body>
+</html>

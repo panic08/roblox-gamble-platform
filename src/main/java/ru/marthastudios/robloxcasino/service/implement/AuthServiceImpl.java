@@ -1,7 +1,7 @@
 package ru.marthastudios.robloxcasino.service.implement;
-
-import com.maximeroussy.invitrode.WordGenerator;
+    
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.marthastudios.robloxcasino.api.RobloxApi;
@@ -20,6 +20,8 @@ import ru.marthastudios.robloxcasino.security.jwt.JwtAccessTokenUtil;
 import ru.marthastudios.robloxcasino.security.jwt.JwtPhraseTokenUtil;
 import ru.marthastudios.robloxcasino.service.AuthService;
 
+import java.util.Random;
+
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +31,8 @@ public class AuthServiceImpl implements AuthService {
     private final JwtAccessTokenUtil jwtAccessTokenUtil;
     private final UserRepository userRepository;
     private final UserRobloxDataRepository userRobloxDataRepository;
+    @Value("${auth.phrases}")
+    private String[] authPhrases;
 
     @Transactional
     @Override
@@ -90,14 +94,17 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public GetAllPhraseByRobloxNicknameResponse getAllPhraseByRobloxNickname(String robloxNickname) {
-        WordGenerator wordGenerator = new WordGenerator();
         StringBuilder phrases = new StringBuilder();
+        Random random = new Random();
 
         for (int i = 0; i < 7; i++){
+            int randomIndex = random.nextInt(authPhrases.length);
+
+            String randomWord = authPhrases[randomIndex];
             if (i == 6){
-                phrases.append(wordGenerator.newWord(5));
+                phrases.append(randomWord);
             } else {
-                phrases.append(wordGenerator.newWord(5)).append(" ");
+                phrases.append(randomWord).append(" ");
             }
         }
 

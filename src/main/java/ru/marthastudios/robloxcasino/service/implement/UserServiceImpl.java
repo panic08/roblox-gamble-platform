@@ -96,6 +96,6 @@ public class UserServiceImpl implements UserService {
         }
 
 
-        return gameToGameDtoMapper.gameListToGameDtoList(gameRepository.findAllByUserIdWithOffsetAndLimit(id, minIndex, maxIndex - minIndex));
+        return gameToGameDtoMapper.gameListToGameDtoList(gameRepository.findAllByUserIdOrderByCreatedAtDescWithOffsetLimit(id, minIndex, maxIndex - minIndex));
     }
 }

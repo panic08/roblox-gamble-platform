@@ -1,5 +1,7 @@
 package ru.marthastudios.robloxcasino.controller;
 
+//import com.opencsv.CSVReader;
+//import com.opencsv.exceptions.CsvValidationException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -10,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +22,6 @@ import ru.marthastudios.robloxcasino.dto.UserItemDto;
 import ru.marthastudios.robloxcasino.payload.games.GetGameStatisticResponse;
 import ru.marthastudios.robloxcasino.repository.ItemRepository;
 import ru.marthastudios.robloxcasino.service.implement.UserServiceImpl;
-
 import java.util.List;
 
 @RestController
@@ -28,7 +30,6 @@ import java.util.List;
 @Tag(name = "Users", description = "This component describes the Users API")
 public class UserController {
     private final UserServiceImpl userService;
-    private final ItemRepository itemRepository;
     @GetMapping("/getAuthInfo")
     @Operation(description = "Get information about the user by 'Authorization' token.")
     @Parameter(in = ParameterIn.HEADER, name = "Authorization",
@@ -90,62 +91,5 @@ public class UserController {
                                             @RequestParam(value = "max_index", required = false) Integer maxIndex){
         return userService.getAllItem(id, minIndex, maxIndex);
     }
-
-
-
-//    @EventListener(ApplicationReadyEvent.class)
-//    public void eventCsvReadReady(){
-//        String csvFile = "C:\\Users\\Andrey\\Desktop\\items.csv";
-//
-//        List<List<String>> data = new ArrayList<>();
-//
-//        try (CSVReader reader = new CSVReader(new FileReader(csvFile))) {
-//            String[] header = reader.readNext(); // Читаем заголовок (названия колонок)
-//
-//            if (header != null) {
-//                // Читаем данные построчно
-//                String[] line;
-//                while ((line = reader.readNext()) != null) {
-//                    // Сохраняем данные в List
-//                    List<String> row = new ArrayList<>();
-//                    for (String value : line) {
-//                        row.add(value);
-//                    }
-//                    data.add(row);
-//                }
-//            }
-//        } catch (IOException | CsvValidationException e) {
-//            e.printStackTrace();
-//        }
-//
-//        List<Item> itemList = new ArrayList<>();
-//
-//        for (List<String> row : data) {
-//            long id = 0;
-//            String fullName = null;
-//            int cost = 0;
-//
-//            int i = 0;
-//            for (String value : row) {
-//                switch (i){
-//                    //case 0 -> id = Long.parseLong(value);
-//                    case 1 -> fullName = value;
-//                    case 2 -> cost = Integer.parseInt(value);
-//                }
-//                i+=1;
-//            }
-//
-//            if (fullName != null){
-//                itemList.add(Item.builder().fullName(fullName).cost(cost).build());
-//            }
-//        }
-//
-//        itemList.forEach(c -> {
-//            System.out.println(c.getId() + " " + c.getFullName() + " " + c.getCost());
-//        });
-//        System.out.println(itemList.size());
-//
-//        itemRepository.saveAll(itemList);
-//    }
 
 }

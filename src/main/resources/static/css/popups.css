@@ -1,0 +1,264 @@
+.login-container,
+.deposit-container,
+.error-container,
+.game-info-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #000000b1;
+  top: 0;
+  left: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.login-block,
+.deposit-block,
+.game-info-block {
+  background-color: #222222;
+  max-width: 505px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  font-family: "Questrial", sans-serif;
+  margin: 0 10px;
+}
+
+.deposit-block,
+.game-info-block {
+  position: relative;
+}
+
+.game-info-block {
+  padding: 50px 20px 40px;
+  align-items: flex-start;
+  border-radius: 20px;
+}
+
+.game-info-block-data {
+  width: 100%;
+  border: 1px solid #3c3c3c;
+  border-radius: 20px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.game-info-other {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.game-info-other-link {
+  color: #a37dd1;
+}
+
+.login-block-title,
+.deposit-title {
+  width: 100%;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 24px;
+  border-bottom: 2px solid #8c70ff;
+  text-shadow: 0px 0px 5px #fff;
+}
+
+.login-block-input {
+  display: block;
+  height: 40px;
+  width: 90%;
+  margin: 20px 0 35px;
+  padding: 0 15px;
+  outline: none;
+  border-radius: 10px;
+  border: 2px solid #2b2b2b;
+  background-color: transparent;
+  color: #7c7c7c;
+  font-size: 24px;
+}
+
+.login-block-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.login-block-btn-submit,
+.login-block-btn-cancel {
+  font-size: 20px;
+  padding: 10px 30px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.login-block-btn-submit {
+  background-color: #8c70ff;
+  color: #000000;
+}
+
+.login-block-btn-cancel {
+  background-color: #323232;
+  color: #7c7c7c;
+}
+
+.login-error-message {
+  margin: 0 0 20px;
+  color: rgb(214, 55, 55);
+}
+
+.phrases {
+  padding: 5px 10px;
+  display: none;
+  align-items: center;
+  gap: 25px;
+  background-color: #323232;
+  width: 100%;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.phrases-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.phrases-title {
+  color: #a690ff;
+  font-size: 18px;
+}
+
+.deposit-form,
+.deposit-bot {
+  display: flex;
+  align-items: center;
+}
+
+.deposit-form {
+  width: 90%;
+  background-color: #292929;
+  justify-content: space-between;
+  height: 45px;
+  padding: 0 0 0 15px;
+  border-radius: 5px;
+  margin: 20px 0 35px;
+}
+
+.deposit-btn {
+  background-color: #8c70ff;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  border-radius: 5px;
+}
+
+.deposit-warning-title {
+  color: #8c70ff;
+  font-size: 22px;
+  margin-bottom: 8px;
+  text-shadow: 0px 0px 5px #8c70ff;
+}
+
+.deposit-warning-flex {
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  padding: 25px 10px;
+  background-color: #292929;
+  border-radius: 5px;
+  width: 80%;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.deposit-warning-image {
+  display: flex;
+  align-items: center;
+}
+
+.deposit-warning-text {
+  font-size: 15px;
+  color: #909090;
+}
+
+.deposit-warning-text span {
+  color: #c2b3ff;
+}
+
+.deposit-close,
+.game-info-close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  transform: scale(0.85);
+  cursor: pointer;
+}
+
+.game-info-close {
+  top: 10px;
+}
+
+.deposit-close img {
+  width: 100%;
+}
+
+.error-container {
+  background-color: #00000038;
+  z-index: 120;
+}
+
+.error-block {
+  max-width: 600px;
+  border-radius: 10px;
+  background-color: #222222;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 20px;
+  margin: 0 10px;
+}
+
+.error-image {
+  filter: invert(45%) sepia(57%) saturate(7382%) hue-rotate(342deg)
+    brightness(104%) contrast(107%);
+  transform: rotate(45deg);
+  max-width: 150px;
+}
+
+.error-close {
+  filter: invert(100%) sepia(1%) saturate(7444%) hue-rotate(234deg)
+    brightness(112%) contrast(101%);
+  max-width: 32px;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.error-text {
+  font-size: 22px;
+  margin: 20px 0 0;
+  text-align: center;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

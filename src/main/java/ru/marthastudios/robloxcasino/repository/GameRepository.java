@@ -13,10 +13,10 @@ public interface GameRepository extends CrudRepository<Game, Long> {
     @Query("SELECT g.* FROM games_table g WHERE g.user_id = :userId")
     List<Game> findAllByUserId(@Param("userId") long userId);
 
-    @Query("SELECT g.* FROM games_table g WHERE g.user_id = :userId OFFSET :minIndex LIMIT :maxIndex")
-    List<Game> findAllByUserIdWithOffsetAndLimit(@Param("userId") long userId,
-                                                     @Param("minIndex") int minIndex,
-                                                     @Param("maxIndex") int maxIndex);
+    @Query("SELECT g.* FROM games_table g WHERE g.user_id = :userId ORDER BY g.created_at DESC OFFSET :offset LIMIT :limit")
+    List<Game> findAllByUserIdOrderByCreatedAtDescWithOffsetLimit(@Param("userId") long userId,
+                                                     @Param("offset") int offset,
+                                                     @Param("limit") int maxIndex);
 
     @Query("SELECT count(*) FROM games_table WHERE user_id = :userId")
     long countByUserId(@Param("userId") long userId);

@@ -1,0 +1,181 @@
+header {
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-mobile-only {
+  display: none;
+}
+
+.header-logo {
+  position: relative;
+  margin: 0 5px;
+}
+
+.header-logo-shadow {
+  position: absolute;
+  filter: blur(1.5px) brightness(1) saturate(1);
+  z-index: 1;
+  left: 0;
+  left: 0;
+  max-width: 140px;
+  width: 100%;
+}
+
+.header-logo-real {
+  max-width: 140px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.header-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.header-nav-item {
+  display: none;
+  padding: 10px 25px;
+  border-radius: 15px;
+  color: #000;
+  font-size: 15.35px;
+  background-color: #8c70ff;
+  box-shadow: 0px 0px 20px 2px rgba(140, 112, 255, 0.4);
+  cursor: pointer;
+}
+
+
+.sidebar {
+  padding: 30px;
+  height: calc(100vh - 85px);
+  max-width: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-item {
+  font-size: 15px;
+  display: flex;
+  gap: 20px;
+  border-radius: 6px;
+  align-items: center;
+  padding: 7px 10px;
+  width: 140px;
+  margin: 10px 0;
+  color: #9f9f9f;
+}
+
+.sidebar-item-image img {
+  width: 20px;
+  height: 20px;
+}
+
+
+div.active-sidebar {
+  display: flex;
+  position: fixed;
+  z-index: 50;
+  background-color: #222222;
+  width: 100%;  
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.sidebar-footer {
+  background-color: #222222;
+  padding: 10px;
+  border: 1px solid #333333;
+  border-radius: 10px;
+}
+
+.sidebar-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.sidebar-footer-logo-mobile {
+  display: none;
+  max-width: 100px;
+}
+
+.sidebar-footer-logo-mobile img{
+  width: 100%;  
+}
+
+.sidebar-footer-discord {
+  background-color: #414141;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.sidebar-footer-text {
+  text-align: center;
+  color: #5c5c5c;
+  font-size: 12px;
+}
+
+@media (max-width: 1150px) {
+  .header-mobile-only {
+    display: block;
+  }
+
+  .header-mobile-only img {
+    max-width: 50px;
+  }
+
+  .sidebar {
+    display: none;
+    max-width: 1150px;
+  }
+  
+  .sidebar-logos{
+    flex-direction: row-reverse;
+    gap: 10px;
+  }
+
+  .sidebar-footer-logo-mobile{
+    display: block;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .header-nav-item {
+    padding: 8px 18px;
+    font-size: 13px;
+  }
+
+  .header-logo img {
+    max-width: 110px;
+  }
+
+  .header-mobile-only img {
+    max-width: 32px;
+  }
+}
+
+
+
+@media (max-width: 450px) {
+  header {
+    padding: 12px;
+  }
+  .sidebar{
+    height: calc(100% - 55px);
+  }
+}
+
+
+@media (max-width: 370px) {
+  .header-logo {
+    display: none;
+  }
+}

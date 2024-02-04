@@ -1,0 +1,155 @@
+.chat {
+  position: absolute;
+  top: 50%;
+  margin-top: calc(-70vh / 2);
+  width: 250px;
+  height: 70vh;
+  right: 0;
+  background-color: #222222;
+  padding: 30px 10px 10px;
+  border-radius: 10px;
+}
+
+.chat-border {
+  height: 2px;
+  width: 100%;
+  background-color: #9159ff;
+  box-shadow: 0px 0px 5px 0.5px #9159ff;
+}
+
+.chat-messages {
+  height: calc(100% - 32px);
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #b9abf3;
+  border-radius: 5px;
+}
+
+.chat-form {
+  height: 32px;
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid #9159ff;
+  justify-content: space-between;
+  padding: 0 5px;
+  align-items: center;
+}
+
+.chat-input {
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: #d1d1d1;
+  font-size: 18px;
+  width: calc(100% - 32px);
+}
+
+.chat-input::placeholder {
+  color: #5e5e5e;
+}
+
+.chat-submit {
+  width: 27px;
+  height: 27px;
+  cursor: pointer;
+}
+
+.chat-submit img {
+  width: 100%;
+}
+
+.message {
+  display: flex;
+  gap: 5px;
+  margin: 5px 0;
+}
+
+.message-logo {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+}
+
+.message-username {
+  font-size: 18px;
+}
+
+.message-text {
+  color: #959595;
+}
+
+.open-chat {
+  display: none;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  background-color: #fff;
+  height: 50px;
+  width: 50px;
+  align-items: center;
+  justify-content: center;
+  background-color: #8c70ff;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  cursor: pointer;
+  z-index: 50;
+  box-shadow: 0px 0px 4px 1px #8c70ff;
+}
+
+.open-chat img {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 800px) {
+  .chat {
+    display: none;
+  }
+
+  .open-chat {
+    display: flex;
+  }
+}
+
+.full-chat {
+  display: block;
+  position: fixed;
+  width: 100%;
+  height: calc(100% - 80px);
+  top: 80px;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  z-index: 20;
+}
+
+.chat-unauth {
+  display: none;
+}
+
+.chat-unauth-text {
+  text-align: center;
+  color: rgb(180, 57, 57);
+  padding: 12px 0 0;
+}
+
+.admin-username {
+  color: rgb(175, 56, 56);
+}
+
+@media (max-width: 450px) {
+  .full-chat {
+    height: calc(100% - 55px);
+    top: 55px;
+  }
+}

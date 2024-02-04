@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface UpgraderItemRepository extends CrudRepository<UpgraderItem, Long> {
-    @Query("SELECT ui.* FROM upgrader_items_table ui OFFSET :minIndex LIMIT :maxIndex")
-    List<UpgraderItem> findAllWithOffsetAndLimit(@Param("minIndex") int minIndex,
-                                             @Param("maxIndex") int maxIndex);
+    @Query("SELECT ui.* FROM upgrader_items_table ui OFFSET :offset LIMIT :limit")
+    List<UpgraderItem> findAllWithOffsetAndLimit(@Param("offset") int offset,
+                                             @Param("limit") int limit);
 }

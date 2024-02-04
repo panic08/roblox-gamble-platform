@@ -1,0 +1,657 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1a1a1a;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  color: #fff;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  overflow: hidden;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+}
+
+li {
+  list-style: none;
+}
+
+@font-face {
+  font-family: "Affect";
+  src: url(/fonts/affect-font.otf);
+}
+
+main {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.main-content {
+  width: 100%;
+  height: 100%;
+}
+
+.upgrader {
+  padding: 20px 40px;
+  width: calc(100% - 250px);
+  height: calc(100vh - 85px);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-item:nth-child(2) {
+  background-color: #411d87;
+  box-shadow: 0px 0px 5px 1px rgba(140, 112, 255, 1) inset;
+}
+
+.chance-block {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: relative;
+  background-color: #1a1a1a;
+  box-shadow: 0px 0px 20px 30px #1a1a1a;
+  font-family: "Affect";
+  font-size: 18px;
+  line-height: 0.8;
+  text-shadow: 0px 0px 5px #fff;
+  z-index: 1;
+}
+
+.chance-text {
+  width: 30%;
+  height: 30%;
+  background-color: #494949;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.chance-border {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.chance-first-border {
+  width: 37%;
+  height: 37%;
+  border: 2px solid #494949;
+}
+
+.chance-second-border {
+  width: 50%;
+  height: 50%;
+  border: 2px solid #494949;
+}
+
+.chance-third-border {
+  width: 75%;
+  height: 75%;
+  border: 2px solid #8c70ff;
+  box-shadow: 0px 0px 4px 1px #8c70ff;
+}
+
+.chance-fourth-border {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #494949;
+}
+
+.chance-line-cross-first {
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background-color: #494949;
+}
+
+.chance-line-cross-second {
+  position: absolute;
+  height: 100%;
+  width: 2px;
+  background-color: #494949;
+}
+
+.chance-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid #8c70ff;
+  width: 5%;
+  height: 5%;
+  box-shadow: 0px 0px 2px 1px #8c70ff;
+}
+
+.chance-circle-first {
+  top: 10%;
+}
+
+.chance-circle-second {
+  right: 10%;
+}
+
+.chance-circle-third {
+  bottom: 10%;
+}
+
+.chance-circle-fourth {
+  left: 10%;
+}
+
+.upgrader-menu {
+  display: flex;
+  background-color: #222222;
+  position: relative;
+  height: 250px;
+  align-items: center;
+  font-family: "Questrial", sans-serif;
+}
+
+.chance-border-bottom {
+  width: 100%;
+  height: 5px;
+  background-color: #8c70ff;
+  box-shadow: 0px 0px 4px 1px #957bff;
+  position: relative;
+}
+
+.item-to-upgrade-block,
+.item-to-receive-block {
+  width: calc(50% - 150px);
+  display: flex;
+  position: relative;
+}
+
+.item-to-upgrade-title,
+.item-to-receive-title {
+  color: #8c70ff;
+  margin: 7px 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.item-to-upgrade-subtitle,
+.item-to-receive-subtitle {
+  margin-bottom: 10px;
+}
+
+.item-to-upgrade-cost,
+.item-to-receive-cost {
+  color: #aafe96;
+}
+
+.item-to-upgrade-image,
+.item-to-receive-image {
+  max-width: 150px;
+  opacity: 0.5;
+}
+
+.upgrade-btn {
+  cursor: pointer;
+  max-width: 250px;
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 26px;
+  background-color: #411d87;
+  box-shadow: 0px 0px 3px 2px #6b4acc;
+  margin: 80px auto 40px;
+  font-family: "Questrial", sans-serif;
+}
+
+.game-menu-search,
+.server-game-menu-search {
+  border-bottom: 2px solid #8c70ff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  gap: 10%;
+}
+
+.game-menu-search-input,
+.server-game-menu-search-input {
+  border-radius: 10px;
+  outline: none;
+  background-color: transparent;
+  border: 2px solid #2b2b2b;
+  color: #fff;
+  font-size: 18px;
+  padding: 4px 8px;
+  display: block;
+  max-width: 300px;
+}
+
+.game-menu-items-list,
+.server-game-menu-items-list {
+  margin-top: 10px;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 160px);
+  grid-template-rows: repeat(auto-fill, 160px);
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.game-menu-items-list::-webkit-scrollbar,
+.server-game-menu-items-list::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+.game-menu-items-list::-webkit-scrollbar-thumb,
+.server-game-menu-items-list::-webkit-scrollbar-thumb {
+  background: #b9abf3;
+  border-radius: 5px;
+}
+
+.game-menu-item-image,
+.server-game-menu-item-image {
+  display: block;
+  width: 96px;
+  height: 96px;
+}
+
+.game-menu-item-block,
+.server-game-menu-item-block {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #2d2d2d;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.game-menu-item-cost,
+.server-game-menu-item-cost {
+  font-family: "Questrial", sans-serif;
+  color: #a2f08f;
+  font-size: 14px;
+}
+
+.game-menu-item-name,
+.server-game-menu-item-name {
+  color: #9f9f9f;
+  font-size: 14px;
+  text-align: center;
+}
+
+.active-item {
+  border: 2px solid #8c70ff;
+  box-shadow: 0px 0px 5px 3px rgba(140, 112, 255, 0.2);
+}
+
+.items-lists {
+  display: flex;
+  width: 100%;
+  gap: 4%;
+  height: calc(100% - 420px);
+  padding-bottom: 5px;
+  padding: 0 5px;
+}
+
+.to-upgrade-items-block,
+.to-receive-items-block {
+  width: 48%;
+  height: 100%;
+}
+
+.item-list-block,
+.server-item-list-block {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #222222;
+  border-radius: 10px;
+}
+
+.game-menu-items-list,
+.server-game-menu-items-list {
+  flex-grow: 1;
+  height: auto;
+}
+
+.item-block-cost-block {
+  padding: 10px;
+  white-space: nowrap;
+}
+
+.item-block-main-info-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .upgrader {
+    width: 100%;
+    padding: 0 0 5px;
+  }
+  .chance-block {
+    width: 240px;
+    height: 240px;
+  }
+
+  .item-to-upgrade-block,
+  .item-to-receive-block {
+    width: calc(50% - 120px);
+  }
+
+  .item-to-receive-image,
+  .item-to-upgrade-image {
+    max-width: 120px;
+    max-height: 120px;
+  }
+  .chance-text {
+    font-size: 14px;
+  }
+  .upgrade-btn {
+    margin: 25px auto 20px;
+  }
+  .upgrader-menu {
+    height: 200px;
+  }
+  .items-lists {
+    height: calc(100% - 295px);
+  }
+}
+
+@media (max-width: 700px) {
+  .chance-block {
+    width: 200px;
+    height: 200px;
+  }
+
+  .upgrade-btn {
+    min-height: 35px;
+    max-width: 200px;
+    font-size: 20px;
+  }
+
+  .item-to-upgrade-block,
+  .item-to-receive-block {
+    width: calc(50% - 100px);
+  }
+  .item-to-receive-image,
+  .item-to-upgrade-image {
+    max-width: 100px;
+    max-height: 100px;
+  }
+  .items-lists {
+    flex-direction: column;
+  }
+  .to-upgrade-items-block,
+  .to-receive-items-block {
+    height: 48%;
+    width: 100%;
+  }
+  .items-lists {
+    height: calc(100% - 260px);
+  }
+}
+
+@media (max-width: 550px) {
+  .upgrader-menu {
+    height: 180px;
+  }
+  .chance-block {
+    width: 120px;
+    height: 120px;
+  }
+
+  .item-to-upgrade-block,
+  .item-to-receive-block {
+    width: calc(50% - 60px);
+  }
+  div.chance-text-title {
+    display: none;
+  }
+
+  .item-to-receive-image,
+  .item-to-upgrade-image {
+    max-width: 80px;
+    max-height: 80px;
+  }
+  .chance-first-border {
+    display: none;
+  }
+  .chance-text {
+    width: 35%;
+    height: 35%;
+  }
+}
+
+.win-border {
+  animation: animate-win-border 3s linear;
+  animation-fill-mode: forwards;
+}
+
+.win-line {
+  animation: animate-win-line 3s linear;
+  animation-fill-mode: forwards;
+}
+
+.loose-border {
+  animation: animate-loose-border 3s linear;
+  animation-fill-mode: forwards;
+}
+
+.loose-line {
+  animation: animate-loose-line 3s linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(calc(360deg * 10));
+  }
+}
+
+@keyframes animate-win-border {
+  from {
+    border-color: currentColor;
+  }
+  to {
+    border-color: rgb(57, 199, 57);
+  }
+}
+
+@keyframes animate-loose-border {
+  from {
+    border-color: currentColor;
+  }
+  to {
+    border-color: rgb(199, 57, 57);
+  }
+}
+
+@keyframes animate-win-line {
+  from {
+    background-color: currentColor;
+  }
+  to {
+    background-color: rgb(57, 199, 57);
+  }
+}
+
+@keyframes animate-loose-line {
+  from {
+    background-color: currentColor;
+  }
+  to {
+    background-color: rgb(199, 57, 57);
+  }
+}
+
+.chance-is-win {
+  display: none;
+  font-weight: bold;
+  text-shadow: none;
+}
+
+.win-text {
+  color: rgb(57, 199, 57);
+  text-shadow: none;
+}
+
+.loose-text {
+  color: rgb(199, 57, 57);
+  text-shadow: none;
+}
+
+.chance-container {
+  position: relative;
+}
+
+.chance-label {
+  position: absolute;
+  left: calc(50% - 12px);
+  top: -5px;
+}
+
+.chance-label-image-real {
+  position: absolute;
+  z-index: 2;
+}
+
+.chance-label-image-shadow {
+  position: absolute;
+  filter: blur(3px) brightness(1) saturate(1);
+  z-index: 1;
+  left: 0;
+  left: 0;
+}
+
+.game-block-title {
+  font-size: 18px;
+  color: #9f9f9f;
+  white-space: nowrap;
+}
+
+@media (max-width: 500px) {
+  .game-menu-items-list,
+  .server-game-menu-items-list {
+    grid-template-columns: repeat(auto-fill, 120px);
+    grid-template-rows: repeat(auto-fill, 120px);
+  }
+  .game-menu-item-image,
+  .server-game-menu-item-image {
+    width: 55px;
+    height: 55px;
+  }
+  .game-menu-item-name,
+  .game-menu-item-name {
+    font-size: 13px;
+  }
+
+  .item-to-receive-cost,
+  .item-to-upgrade-cost {
+    font-size: 14px;
+  }
+  .item-block-cost-block {
+    padding: 10px 5px;
+  }
+  .item-to-upgrade-title,
+  .item-to-receive-title {
+    font-size: 15px;
+  }
+  .item-to-upgrade-subtitle,
+  .item-to-receive-subtitle {
+    font-size: 14px;
+  }
+  .upgrader-menu {
+    height: 150px;
+  }
+  .items-lists {
+    height: calc(100% - 235px);
+  }
+  .game-menu-search-input,
+  .server-game-menu-search-input {
+    padding: 2px 5px;
+    font-size: 15px;
+  }
+  .game-block-title {
+    font-size: 15px;
+  }
+}
+
+@media (max-height: 700px) {
+  .game-menu-item-block {
+    padding: 5px;
+  }
+
+  .game-menu-items-list,
+  .server-game-menu-items-list {
+    grid-template-columns: repeat(auto-fill, 110px);
+    grid-template-rows: repeat(auto-fill, 110px);
+  }
+  .game-menu-item-image,
+  .server-game-menu-item-image {
+    width: 50px;
+    height: 50px;
+  }
+  .game-menu-item-name {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 430px) {
+  .chance-block {
+    width: 100px;
+    height: 100px;
+  }
+  .chance-label-image-real,
+  .chance-label-image-shadow {
+    transform: scale(0.8);
+  }
+  .item-to-upgrade-block,
+  .item-to-receive-block {
+    width: calc(50% - 50px);
+  }
+  .chance-block {
+    box-shadow: 0px 0px 20px 15px #1a1a1a;
+  }
+  .items-lists {
+    height: calc(100% - 210px);
+  }
+}
+
+@media (max-width: 380px) {
+  .game-menu-search-input {
+    max-width: 200px;
+  }
+  .game-menu-search {
+    gap: 10px;
+  }
+  .upgrade-btn {
+    margin: 20px auto 15px;
+  }
+  .items-lists {
+    height: calc(100% - 200px);
+  }
+}

@@ -1,10 +1,13 @@
 package ru.marthastudios.robloxcasino.util;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+@Component
 public class DiceRollUtil {
     public static double generateRandomNumber(String serverSeed, String clientSeed, String salt) {
         try {

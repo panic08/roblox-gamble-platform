@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" th:href="@{/css/chat.css}" />
+    <link rel="stylesheet" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" th:href="@{/css/inventory/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/popups.css}" />
+    <link rel="shortcut icon" th:href="@{/img/flpicon.png}" type="image/x-icon">
+    <title>RoFlip | Inventory</title>
+  </head>
+  <body>
+    <header>
+      <div class="header-mobile-only">
+        <img th:src="@{/img/burger.png}" alt="" />
+      </div>
+      <a href="/" class="header-logo">
+        <img th:src="@{/img/header-logo.png}" class="header-logo-shadow" />
+        <img th:src="@{/img/header-logo.png}" class="header-logo-real" alt="logo" />
+      </a>
+      <div class="header-nav">
+        <div class="header-nav-item auth header-deposit">Deposit</div>
+        <a class="header-nav-item auth" href="/inventory"
+          >Inventory</a
+        >
+        <div class="header-nav-item un-auth header-login">Login</div>
+      </div>
+    </header>
+    <main>
+      <div class="sidebar">
+        <div class="sidebar-nav">
+          <a href="/" class="sidebar-item">
+            <div class="sidebar-item-image">
+              <img th:src="@{/img/sidebar-coin.png}" alt="sidebar-image" />
+            </div>
+            <div class="sidebar-item-text">Coinflip</div></a
+          >
+          <a href="/upgrader" class="sidebar-item">
+            <div class="sidebar-item-image">
+              <img th:src="@{/img/sidebar-firework.png}" alt="sidebar-image" />
+            </div>
+            <div class="sidebar-item-text">Upgrader</div></a
+          >
+        </div>
+        <div class="sidebar-footer">
+          <div class="sidebar-logos">
+            <a href="/" class="sidebar-footer-logo-mobile">
+              <img th:src="@{/img/header-logo.png}" alt="" />
+            </a>
+            <a
+              href="https://discord.gg/5MbsZhGnYM"
+              target="_blank"
+              class="sidebar-footer-discord"
+            >
+              <img th:src="@{/img/discord.png}"alt="" />
+            </a>
+          </div>
+          <div class="sidebar-footer-text">
+            Please note that RoFlip is an independent venture and not endorsed,
+            sposored, or affiliated with Roblox Corporation. Copyright © roflip
+            2024.
+          </div>
+        </div>
+      </div>
+      <div class="main-content">
+        <div class="inventory">
+          <div class="user-profile">
+            <div class="user-data">
+              <div class="user-block-mobile">
+                <div class="user-info">
+                  <div class="user-logo">
+                    <img src="" alt="" class="user-logo-image" />
+                  </div>
+                  <div class="user-block-mobile-text">
+                    <div class="user-name"></div>
+                    <div class="user-numbers">
+                      <div class="user-profit">
+                        <div class="user-profit-title">Total profit:</div>
+                        <div class="user-profit-number"></div>
+                      </div>
+                      <div class="user-games-played">
+                        <div class="user-games-played-title">Games played:</div>
+                        <div class="user-games-played-number"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="user-info">
+                <div class="user-logo">
+                  <img src="" alt="" class="user-logo-image" />
+                </div>
+                <div class="user-name"></div>
+              </div>
+              <div class="user-numbers">
+                <div class="user-profit">
+                  <div class="user-profit-title">Total profit:</div>
+                  <div class="user-profit-number"></div>
+                </div>
+                <div class="user-games-played">
+                  <div class="user-games-played-title">Games played:</div>
+                  <div class="user-games-played-number"></div>
+                </div>
+              </div>
+              <div class="user-choice">
+                <div class="user-history user-choice-item">History</div>
+                <div class="user-inventory user-choice-item active-user-choice">
+                  Inventory
+                </div>
+              </div>
+            </div>
+            <div class="user-btn">Withdraw</div>
+          </div>
+          <div class="inventory-block"></div>
+          <div class="history-block">
+            <div class="history-title">Game History</div>
+            <div class="history-types">
+              <div class="history-type">ID</div>
+              <div class="history-type">Amount</div>
+              <div class="history-type">Type</div>
+            </div>
+            <div class="history-list"></div>
+            <div class="history-btns">
+              <div class="more-left-btn history-btn">
+                <img th:src="@{/img/play.png}" alt="" />
+                <img th:src="@{/img/play.png}" alt="" />
+              </div>
+              <div class="left-btn history-btn">
+                <img th:src="@{/img/play.png}" alt="" />
+              </div>
+
+              <div class="right-btn history-btn">
+                <img th:src="@{/img/play.png}" alt="" />
+              </div>
+              <div class="more-right-btn history-btn">
+                <img th:src="@{/img/play.png}" alt="" />
+                <img th:src="@{/img/play.png}" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="error-container popup">
+      <div class="error-block">
+        <img class="error-image" th:src="@{/img/plus.png}" alt="" />
+        <div class="error-text">Error text</div>
+        <img class="error-close" th:src="@{/img/plus.png}" alt="" />
+      </div>
+    </div>
+    <div class="login-container popup">
+      <div class="login-block">
+        <div class="login-block-title">Login</div>
+        <input type="text" class="login-block-input" placeholder="Username" />
+        <div class="phrases">
+          <div class="phrases-image">
+            <img th:src="@{/img/shield.png}" alt="" />
+          </div>
+          <div class="phrases-content">
+            <div class="phrases-title">
+              Put code in your roblox description:
+            </div>
+            <div class="phrases-text"></div>
+          </div>
+        </div>
+        <div class="login-block-btns">
+          <div class="login-block-btn-submit">Login</div>
+          <div class="login-block-btn-cancel">Cancel</div>
+        </div>
+      </div>
+    </div>
+    <div class="deposit-container popup">
+      <div class="deposit-block">
+        <div class="deposit-title">Deposit Items</div>
+        <div class="deposit-form">
+          <div class="deposit-bot">
+            <div class="deposit-bot-name">RF_HolderBot</div>
+            <div class="deposit-bot-icon">
+              <img th:src="@{/img/deposit-icon.png}" alt="" />
+            </div>
+          </div>
+          <a
+            href="https://www.roblox.com/share?code=6c561210ec6a9c488f4ff0b331024c81&type=Server"
+            class="deposit-btn"
+            target="_blank"
+            >JOIN</a
+          >
+        </div>
+        <div class="deposit-warning-title">Warning!</div>
+        <div class="deposit-warning-flex">
+          <div class="deposit-warning-image">
+            <img th:src="@{/img/shield.png}" alt="" />
+          </div>
+          <div class="deposit-warning-text">
+            <div>
+              There may be players with a similar nickname on the servers.
+              Double check the bot's nickname before deposit items.
+            </div>
+            <div>
+              <span>RoFlip is not responsible for stolen items!</span>
+            </div>
+          </div>
+        </div>
+        <div class="deposit-close">
+          <img th:src="@{/img/cancel.png}" alt="close" />
+        </div>
+      </div>
+    </div>
+    <div class="chat">
+      <div class="chat-border"></div>
+      <div class="chat-messages"></div>
+      <div class="chat-form">
+        <input
+          type="text"
+          class="chat-input"
+          placeholder="Type something here..."
+        />
+        <div class="chat-submit">
+          <img th:src="@{/img/message.png}" alt="" />
+        </div>
+      </div>
+      <div class="chat-border chat-unauth"></div>
+      <div class="chat-unauth chat-unauth-text">You are not authorized</div>
+    </div>
+    <div class="open-chat">
+      <img class="open-chat-image" th:src="@{/img/arrow.png}" alt="" />
+    </div>
+
+    <script
+      type="module"
+      th:src="@{/scripts/inventory/inventoryChoice.js}"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script type="module" th:src="@{/scripts/socket/socket.js}"></script>
+    <script type="module" th:src="@{/scripts/chat/openChat.js}"></script>
+    <script type="module" th:src="@{/scripts/chat/message.js}"></script>
+    <script type="module" th:src="@{/scripts/chat/authChat.js}"></script>
+    <script type="module" th:src="@{/scripts/inventory/history.js}"></script>
+    <script type="module" th:src="@{/scripts/inventory/withdraw.js}"></script>
+    <script type="module" th:src="@{/scripts/inventory/initInventory.js}"></script>
+    <script type="module" th:src="@{/scripts/inventory/userData.js}"></script>
+    <script type="module" th:src="@{/scripts/page/loginForm.js}"></script>
+    <script type="module" th:src="@{/scripts/page/replaceAuth.js}"></script>
+    <script type="module" th:src="@{/scripts/page/depositForm.js}"></script>
+    <script type="module" th:src="@{/scripts/page/sidebar.js}"></script>
+    <script type="module" th:src="@{/scripts/page/handleEscape.js}"></script>
+    <script type="module" th:src="@{/scripts/page/header.js}"></script>
+  </body>
+</html>
