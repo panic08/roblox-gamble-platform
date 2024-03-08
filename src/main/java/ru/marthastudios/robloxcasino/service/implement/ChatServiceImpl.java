@@ -40,7 +40,7 @@ public class ChatServiceImpl implements ChatService {
 
         for (String filteredWord : filteredWords) {
             if (createMessageRequest.getMessage().contains(filteredWord)) {
-                throw new ChatException("You sent a blocked word \"" + filteredWord + "\" in the chat");
+                throw new ChatException("You cannot send this message");
             }
         }
 
