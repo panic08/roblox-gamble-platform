@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,5 +14,5 @@ import java.util.List;
 public class CreateWithdrawalRequest {
     @NotEmpty(message = "Specify at least 1 user_item_id")
     @JsonProperty("user_items_ids")
-    private List<Long> userItemsIds;
+    private Set<Long> userItemsIds;
 }
